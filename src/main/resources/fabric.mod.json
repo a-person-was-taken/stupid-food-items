@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "stupidfooditems",
+  "version": "1.0.0",
+  "name": "StupidFoodItems",
+  "description": "A plugin specifically designed for Among Us SMP.",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/stupidfooditems/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "com.me.stupidfooditems.client.StupidfooditemsDataGenerator"
+    ],
+    "client": [
+      "com.me.stupidfooditems.client.StupidfooditemsClient"
+    ],
+    "main": [
+      "com.me.stupidfooditems.Stupidfooditems"
+    ]
+  },
+  "mixins": [
+    "stupidfooditems.mixins.json",
+    {
+      "config": "stupidfooditems.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "fabric": "*",
+    "fabric-api": "*",
+    "minecraft": ">=1.21.4"
+  }
+}
