@@ -1,11 +1,8 @@
 package com.me.stupidfooditems;
 
-import com.me.stupidfooditems.client.StupidfooditemsClient;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.ConsumableComponents;
@@ -31,18 +28,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.PlayerInput;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Function;
-
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-
-import static com.me.stupidfooditems.Stupidfooditems.StupidFoods.MOD_ID;
 
 public class Stupidfooditems implements ModInitializer {
     @Override
