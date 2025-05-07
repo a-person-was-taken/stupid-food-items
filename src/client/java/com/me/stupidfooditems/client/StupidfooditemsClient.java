@@ -8,6 +8,7 @@ import net.minecraft.particle.ParticleTypes;
 public class StupidfooditemsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        // After all client events
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.player != null && client.player.hasStatusEffect(Stupidfooditems.StupidFoods.SLIPPAGE)) {
                 // Add particle effects while moving
