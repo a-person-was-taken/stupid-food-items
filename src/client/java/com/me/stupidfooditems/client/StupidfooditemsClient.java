@@ -11,7 +11,10 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PlayerInput;
 
-import java.util.concurrent.atomic.AtomicReference;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.packet.CustomPayload;
 
 public class StupidfooditemsClient implements ClientModInitializer {
     public record PlayerInputC2SPayload(PlayerInput input) implements CustomPayload {
@@ -42,10 +45,6 @@ public class StupidfooditemsClient implements ClientModInitializer {
                             0, 0.1, 0
                     );
                 }
-                //Define custom packet
-                PlayerInputC2SPayload payload = new PlayerInputC2SPayload(PlayerInput.DEFAULT);
-                // Send custom packet to the server
-                ClientPlayNetworking.send(payload);
             }
         });
     }
