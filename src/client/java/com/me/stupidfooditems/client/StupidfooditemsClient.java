@@ -3,12 +3,7 @@ package com.me.stupidfooditems.client;
 import com.me.stupidfooditems.Stupidfooditems;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.PlayerInput;
 
 public class StupidfooditemsClient implements ClientModInitializer {
     @Override
