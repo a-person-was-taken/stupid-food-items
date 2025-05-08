@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "stupidfooditems:item/butter_cookie"
+    "layer0": "stupidfooditems:item/circular_butter_cookie"
   }
 }

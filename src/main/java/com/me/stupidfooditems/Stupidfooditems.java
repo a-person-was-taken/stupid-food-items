@@ -12,10 +12,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.item.consume.ApplyEffectsConsumeEffect;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.Potions;
 import net.minecraft.registry.Registries;
@@ -28,6 +28,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
 import java.util.function.Function;
@@ -72,11 +73,14 @@ public class Stupidfooditems implements ModInitializer {
                 ServerPlayerEntity player = (ServerPlayerEntity) entity;
                 if (!player.isOnGround()) return true;
 
-                if (Math.random() * 100 < (0.1 * amplifier)){
-                    double slipStrength = 30 + (amplifier * 2);
-                    player.setVelocity(player.getVelocity().add(slipStrength, slipStrength, slipStrength));
+                if (Math.random() * 100 < (1.5 * amplifier)){
+                    double slipStrength = 5 + (amplifier * 2);
+                    double dir = (Math.random() * 2 - 1) * 180;
+                    player.setVelocity(new Vec3d(Math.sin(dir) * slipStrength, slipStrength, Math.cos(dir) * slipStrength));
                     player.velocityModified = true;
-                }
+                    player.networkHandler.sendPacket(
+                            new TitleS2CPacket(Text.of("You slipped..."))
+                    );                }
 
                 return super.applyUpdateEffect(world, entity, amplifier);
             }
@@ -95,10 +99,14 @@ public class Stupidfooditems implements ModInitializer {
 
         public static final ConsumableComponent BUTTER_COOKIE_CONSUMABLE_COMPONENT = ConsumableComponents.food()
                 // The duration is in ticks, 20 ticks = 1 second
-                .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.POISON, 6 * 20, 1), 1.0f))
+                .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StupidFoods.SLIPPAGE, 60 * 20, 1), 1.0f))
                 .build();
 
-        public static final Item BUTTER_COOKIE = register("butter_cookie", Item::new, new Item.Settings().food(new FoodComponent(2,3,true), BUTTER_COOKIE_CONSUMABLE_COMPONENT));
+        public static final Item CIRCULAR_BUTTER_COOKIE = register("circular_butter_cookie", Item::new, new Item.Settings().food(new FoodComponent(2,3,true), BUTTER_COOKIE_CONSUMABLE_COMPONENT));
+        public static final Item RECTANGULAR_BUTTER_COOKIE = register("rectangular_butter_cookie", Item::new, new Item.Settings().food(new FoodComponent(2,3,true), BUTTER_COOKIE_CONSUMABLE_COMPONENT));
+        public static final Item TRIANGULAR_BUTTER_COOKIE = register("triangular_butter_cookie", Item::new, new Item.Settings().food(new FoodComponent(2,3,true), BUTTER_COOKIE_CONSUMABLE_COMPONENT));
+        public static final Item UMBRELLA_BUTTER_COOKIE = register("umbrella_butter_cookie", Item::new, new Item.Settings().food(new FoodComponent(2,3,true), BUTTER_COOKIE_CONSUMABLE_COMPONENT));
+
         private static Object Settings;
         public static void initialize() {
             // Register the potion
@@ -117,7 +125,11 @@ public class Stupidfooditems implements ModInitializer {
 
             // Add items to the group
             ItemGroupEvents.modifyEntriesEvent(STUPID_FOOD_ITEM_GROUP).register(itemGroup -> {
-                itemGroup.add(BUTTER_COOKIE);
+                itemGroup.add(CIRCULAR_BUTTER_COOKIE);
+                itemGroup.add(RECTANGULAR_BUTTER_COOKIE);
+                itemGroup.add(TRIANGULAR_BUTTER_COOKIE);
+                itemGroup.add(UMBRELLA_BUTTER_COOKIE);
+
                 // Slippage Potions
                 itemGroup.add(PotionContentsComponent.createStack(Items.POTION, RegistryEntry.of(SLIPPAGE_POTION)));
             });
@@ -128,7 +140,7 @@ public class Stupidfooditems implements ModInitializer {
                 RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(MOD_ID, "stupid_food_group"));
 
         public static final ItemGroup CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
-                .icon(() -> new ItemStack(BUTTER_COOKIE))
+                .icon(() -> new ItemStack(CIRCULAR_BUTTER_COOKIE))
                 .displayName(Text.translatable("itemGroup." + MOD_ID))
                 .build();
     }
