@@ -11,7 +11,7 @@ public class StupidfooditemsClient implements ClientModInitializer {
         // After all client events
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.player == null) return;
-            if (client.player.hasStatusEffect(Stupidfooditems.StupidFoods.SLIPPAGE)) {
+            if (client.player.hasStatusEffect(Stupidfooditems.StupidEffects.SlippageEffectClass.SLIPPAGE)) {
                 // Add particle effects while moving
                 if (client.player.getVelocity().horizontalLengthSquared() > 0.01) {
                     assert client.world != null;

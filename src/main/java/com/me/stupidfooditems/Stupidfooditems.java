@@ -38,55 +38,89 @@ public class Stupidfooditems implements ModInitializer {
     public void onInitialize() {
         StupidFoods.initialize();
     }
-    public static class StupidFoods {
-        public static String MOD_ID = "stupidfooditems";
-        // Define the effect first
-        public static final RegistryEntry<StatusEffect> SLIPPAGE =
-                Registry.registerReference(
-                        Registries.STATUS_EFFECT,
-                        Identifier.of(MOD_ID, "slippage"),
-                        new SlippageEffect()
-                );
+    public static String MOD_ID = "stupidfooditems";
+    public static class StupidEffects {
+        public static class SlippageEffectClass {
+            public static final RegistryEntry<StatusEffect> SLIPPAGE =
+                    Registry.registerReference(
+                            Registries.STATUS_EFFECT,
+                            Identifier.of(MOD_ID, "slippage"),
+                            new SlippageEffect()
+                    );
 
-        // Then define the potion that uses the effect
+            public static class SlippageEffect extends StatusEffect {
+                protected SlippageEffect() {
+                    super(StatusEffectCategory.HARMFUL, 0x75dfff);
+                }
+
+                @Override
+                public boolean canApplyUpdateEffect(int duration, int amplifier) {
+                    return true;
+                }
+
+                public boolean applyUpdateEffect(ServerWorld world, LivingEntity entity, int amplifier) {
+                    // Your effect logic here
+                    ServerPlayerEntity player = (ServerPlayerEntity) entity;
+                    if (!player.isOnGround()) return true;
+
+                    if (Math.floor(Math.random()) * 100 < (10 * amplifier)){
+                        double slipStrength = 5 + (amplifier * 2);
+                        double randYaw = (Math.random() * 2 - 1) * 180;
+                        double randPitch = Math.random() * 90; // No downwards movement
+                        //Randomize direction
+                        player.setVelocity(new Vec3d(Math.cos(randYaw) * Math.cos(randPitch) * slipStrength, Math.sin(randPitch) * slipStrength, Math.sin(randYaw) * Math.cos(randPitch) * slipStrength));
+                        player.velocityModified = true;
+                        player.networkHandler.sendPacket(
+                                new TitleS2CPacket(Text.of("You slipped..."))
+                        );                }
+
+                    return super.applyUpdateEffect(world, entity, amplifier);
+                }
+            }
+        }
+        public static class StickyLegsEffectClass {
+            public static final RegistryEntry<StatusEffect> STICKY_LEGS =
+                    Registry.registerReference(
+                            Registries.STATUS_EFFECT,
+                            Identifier.of(MOD_ID, "sticky_legs"),
+                            new StickyLegsEffect()
+                    );
+
+            public static class StickyLegsEffect extends StatusEffect {
+                protected StickyLegsEffect() {
+                    super(StatusEffectCategory.HARMFUL,0xffc014);
+                }
+
+                @Override
+                public boolean canApplyUpdateEffect(int duration, int amplifier) {
+                    return true;
+                }
+
+                public boolean applyUpdateEffect(ServerWorld world, LivingEntity entity, int amplifier) {
+                    // Your effect logic here
+                    ServerPlayerEntity player = (ServerPlayerEntity) entity;
+                    Vec3d playerVelocity = player.getVelocity();
+                    if(playerVelocity.y > 0){
+                        player.setVelocity(new Vec3d(playerVelocity.x * 0.8, 0, playerVelocity.y * 0.8));
+                        player.velocityModified = true;
+                    }
+                    return super.applyUpdateEffect(world, entity, amplifier);
+                }
+            }
+        }
+    }
+    public static class StupidPotions {
         public static final Potion SLIPPAGE_POTION =
                 Registry.register(
                         Registries.POTION,
                         Identifier.of(MOD_ID, "slippage"),
                         new Potion("slippage",
                                 new StatusEffectInstance(
-                                        SLIPPAGE,
+                                        StupidEffects.SlippageEffectClass.SLIPPAGE,
                                         3600,
                                         0)));
-        public static class SlippageEffect extends StatusEffect {
-            protected SlippageEffect() {
-                super(StatusEffectCategory.HARMFUL, 0x75dfff);
-            }
-
-            @Override
-            public boolean canApplyUpdateEffect(int duration, int amplifier) {
-                return true;
-            }
-
-            public boolean applyUpdateEffect(ServerWorld world, LivingEntity entity, int amplifier) {
-                // Your effect logic here
-                ServerPlayerEntity player = (ServerPlayerEntity) entity;
-                if (!player.isOnGround()) return true;
-
-                if (Math.floor(Math.random()) * 100 < (10 * amplifier)){
-                    double slipStrength = 5 + (amplifier * 2);
-                    double randYaw = (Math.random() * 2 - 1) * 180;
-                    double randPitch = Math.random() * 90; // No downwards movement
-                    //Randomize direction
-                    player.setVelocity(new Vec3d(Math.cos(randYaw) * Math.cos(randPitch) * slipStrength, Math.sin(randPitch) * slipStrength, Math.sin(randYaw) * Math.cos(randPitch) * slipStrength));
-                    player.velocityModified = true;
-                    player.networkHandler.sendPacket(
-                            new TitleS2CPacket(Text.of("You slipped..."))
-                    );                }
-
-                return super.applyUpdateEffect(world, entity, amplifier);
-            }
-        }
+    }
+    public static class StupidFoods {
 
         public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type, String key, Formatting color) {
             tooltip.add(Text.translatable(key).formatted(color));
@@ -101,7 +135,10 @@ public class Stupidfooditems implements ModInitializer {
 
         public static final ConsumableComponent BUTTER_COOKIE_CONSUMABLE_COMPONENT = ConsumableComponents.food()
                 // The duration is in ticks, 20 ticks = 1 second
-                .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StupidFoods.SLIPPAGE, 60 * 20, 1), 1.0f))
+                .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StupidEffects.SlippageEffectClass.SLIPPAGE, 60 * 20, 1), 1.0f))
+                .build();
+        public static final ConsumableComponent HONEY_COOKIE_CONSUMABLE_COMPONENT = ConsumableComponents.food()
+                .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StupidEffects.StickyLegsEffectClass.STICKY_LEGS, 60 * 20, 1)))
                 .build();
         public static final FoodComponent BUTTER_COOKIE_FOOD_COMPONENT = new FoodComponent(2,3,true);
         public static final Item CIRCULAR_BUTTER_COOKIE = register("circular_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
@@ -109,6 +146,7 @@ public class Stupidfooditems implements ModInitializer {
         public static final Item TRIANGULAR_BUTTER_COOKIE = register("triangular_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
         public static final Item STAR_BUTTER_COOKIE = register("star_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
         public static final Item UMBRELLA_BUTTER_COOKIE = register("umbrella_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
+        public static final Item HONEY_COOKIE = register("honey_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, HONEY_COOKIE_CONSUMABLE_COMPONENT));
 
         public static void initialize() {
             // Register the potion
@@ -119,7 +157,7 @@ public class Stupidfooditems implements ModInitializer {
                         // Ingredient
                         Items.ICE,
                         // Output potion.
-                        Registries.POTION.getEntry(SLIPPAGE_POTION)
+                        Registries.POTION.getEntry(StupidPotions.SLIPPAGE_POTION)
                 );
             });
             // Register the item group
@@ -134,7 +172,7 @@ public class Stupidfooditems implements ModInitializer {
                 itemGroup.add(UMBRELLA_BUTTER_COOKIE);
 
                 // Slippage Potions
-                itemGroup.add(PotionContentsComponent.createStack(Items.POTION, RegistryEntry.of(SLIPPAGE_POTION)));
+                itemGroup.add(PotionContentsComponent.createStack(Items.POTION, RegistryEntry.of(StupidPotions.SLIPPAGE_POTION)));
             });
 
         }
