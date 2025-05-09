@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "stupidfooditems:item/triangular_butter_cookie"
+  }
+}

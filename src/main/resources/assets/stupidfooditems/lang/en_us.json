@@ -1,5 +1,10 @@
 {
-  "item.stupidfooditems.butter_cookie": "Butter Cookie",
+  "item.stupidfooditems.circular_butter_cookie": "Circular Butter Cookie",
+  "item.stupidfooditems.rectangular_butter_cookie": "Rectangular Butter Cookie",
+  "item.stupidfooditems.star_butter_cookie": "Star Butter Cookie",
+  "item.stupidfooditems.triangular_butter_cookie": "Triangular Butter Cookie",
+  "item.stupidfooditems.umbrella_butter_cookie": "Umbrella Butter Cookie",
   "effect.stupidfooditems.slippage": "Slippage",
+  "item.minecraft.potion.effect.slippage": "Potion of Slippage",
   "itemGroup.stupidfooditems": "Stupid Foods"
 }
