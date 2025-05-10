@@ -21,7 +21,9 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.item.ItemStack;
 
 import java.util.function.Function;
 
@@ -87,7 +89,7 @@ public class Stupidfooditems implements ModInitializer {
                         double slipStrength = 5 + (amplifier * 2);
                         double randYaw = (Math.random() * 2 - 1) * 180;
                         double randPitch = Math.abs(Math.random()) * 89.9; // No downwards or horizontal movement
-                        //Randomize direction
+                        // Randomize direction
                         player.setVelocity(new Vec3d(Math.cos(randYaw) * Math.cos(randPitch) * slipStrength, Math.sin(randPitch) * slipStrength, Math.sin(randYaw) * Math.cos(randPitch) * slipStrength));
                         player.velocityModified = true;
                         player.networkHandler.sendPacket(
@@ -121,11 +123,14 @@ public class Stupidfooditems implements ModInitializer {
                     // Your effect logic here
                     ServerPlayerEntity player = (ServerPlayerEntity) entity;
                     Vec3d playerVelocity = player.getVelocity();
-                    double friction = ((1 - 0.15 * amplifier) < 0 ? 0 : (1 - 0.15 * amplifier));
+                    double friction = ((1 - 0.15 * (amplifier + 1)) < 0 ? 0 : (1 - 0.15 * (amplifier + 1)));
                     if(playerVelocity.y > 0){
-                        player.setVelocity(new Vec3d(playerVelocity.x * friction, 0, playerVelocity.z * friction));
-                        player.velocityModified = true;
+                        player.setVelocity(new Vec3d(playerVelocity.x * friction, -playerVelocity.y, playerVelocity.z * friction));
                     }
+                    else {
+                        player.setVelocity(new Vec3d(playerVelocity.x * friction, playerVelocity.y, playerVelocity.z * friction));
+                    }
+                    player.velocityModified = true;
                     return super.applyUpdateEffect(world, entity, amplifier);
                 }
             }
@@ -174,6 +179,7 @@ public class Stupidfooditems implements ModInitializer {
                 // Potions
                 itemGroup.add(PotionContentsComponent.createStack(Items.POTION, RegistryEntry.of(StupidPotions.SLIPPAGE_POTION)));
                 itemGroup.add(PotionContentsComponent.createStack(Items.POTION, RegistryEntry.of(StupidPotions.STICKY_LEGS_POTION)));
+
             });
 
         }
@@ -199,18 +205,19 @@ public class Stupidfooditems implements ModInitializer {
 
             public static final FoodComponent DISGUSTING_COOKIE_FOOD_COMPONENT = new FoodComponent(1, 0, true);
             public static final ConsumableComponent DISGUSTING_COOKIE_CONSUMABLE_COMPONENT = ConsumableComponents.food()
-                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.HASTE, 60 * 20, 9), 1.0f))
+                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.POISON, 60 * 20, 9), 1.0f))
+                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 60 * 20, 9),1.0f))
                     .build();
         }
 
         public static final Item BUTTER_COOKIE = register("butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
-        public static final Item RECTANGULAR_BUTTER_COOKIE = register("rectangular_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
-        public static final Item TRIANGULAR_BUTTER_COOKIE = register("triangular_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
-        public static final Item STAR_BUTTER_COOKIE = register("star_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
-        public static final Item UMBRELLA_BUTTER_COOKIE = register("umbrella_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
-        public static final Item HONEY_COOKIE = register("honey_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, StupidFoodComponents.HONEY_COOKIE_CONSUMABLE_COMPONENT));
-        public static final Item DISGUSTING_COOKIE = register("disgusting_cookie", Item::new, new Item.Settings().food(DISGUSTING_COOKIE_FOOD_COMPONENT, DISGUSTING_COOKIE_CONSUMABLE_COMPONENT));
-        public static final Item NUKE_COOKIE = register("nuke_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
+        public static final Item RECTANGULAR_BUTTER_COOKIE = register("rectangular_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.UNCOMMON));
+        public static final Item TRIANGULAR_BUTTER_COOKIE = register("triangular_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.UNCOMMON));
+        public static final Item STAR_BUTTER_COOKIE = register("star_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.UNCOMMON));
+        public static final Item UMBRELLA_BUTTER_COOKIE = register("umbrella_butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.UNCOMMON));
+        public static final Item HONEY_COOKIE = register("honey_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, HONEY_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.RARE));
+        public static final Item DISGUSTING_COOKIE = register("disgusting_cookie", Item::new, new Item.Settings().food(DISGUSTING_COOKIE_FOOD_COMPONENT, DISGUSTING_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.RARE));
+        public static final Item NUKE_COOKIE = register("nuke_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT).rarity(Rarity.EPIC));
 
 
         public static final RegistryKey<ItemGroup> STUPID_FOOD_ITEM_GROUP =

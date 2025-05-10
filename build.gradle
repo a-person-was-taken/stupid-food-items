@@ -30,12 +30,23 @@ fabricApi {
 repositories {
 }
 
+mixin {
+    add sourceSets.main, "com.me.stupidfooditems.mixins.refmap.json"
+    config "com.me.stupidfooditems.mixins.json"
+}
+
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation(annotationProcessor("org.ow2.asm:asm:9.5"))
+    implementation(annotationProcessor("org.ow2.asm:asm-analysis:9.5"))
+    implementation(annotationProcessor("org.ow2.asm:asm-commons:9.5"))
+    implementation(annotationProcessor("org.ow2.asm:asm-tree:9.5"))
+    implementation(annotationProcessor("org.ow2.asm:asm-util:9.5"))
+    implementation(annotationProcessor("net.fabricmc:sponge-mixin:0.12.5+mixin.0.8.5"))
 }
 
 processResources {
@@ -95,5 +106,6 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+        'github.com/a-person-was-taken/stupid-food-items'
     }
 }
