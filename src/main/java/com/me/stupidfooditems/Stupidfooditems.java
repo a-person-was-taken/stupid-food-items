@@ -176,6 +176,7 @@ public class Stupidfooditems implements ModInitializer {
                 itemGroup.add(HONEY_COOKIE);
                 itemGroup.add(DISGUSTING_COOKIE);
                 itemGroup.add(NUKE_COOKIE);
+                itemGroup.add(WONDERFUL_COOKIE);
 
                 // Potions
                 itemGroup.add(PotionContentsComponent.createStack(Items.POTION, RegistryEntry.of(StupidPotions.SLIPPAGE_POTION)));
