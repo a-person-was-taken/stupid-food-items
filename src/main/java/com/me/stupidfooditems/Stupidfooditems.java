@@ -209,6 +209,13 @@ public class Stupidfooditems implements ModInitializer {
                     .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.POISON, 60 * 20, 9), 1.0f))
                     .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 60 * 20, 9),1.0f))
                     .build();
+
+            public static final ConsumableComponent WONDERFUL_COOKIE_CONSUMABLE_COMPONENT = ConsumableComponents.food()
+                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 20 * 60 * 2), 1.0f))
+                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 20 * 30), 1.0f))
+                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 20 * 60 * 5), 1.0f))
+                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20 * 60 * 5), 1.0f))
+
         }
 
         public static final Item BUTTER_COOKIE = register("butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
@@ -219,7 +226,7 @@ public class Stupidfooditems implements ModInitializer {
         public static final Item HONEY_COOKIE = register("honey_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, HONEY_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.RARE));
         public static final Item DISGUSTING_COOKIE = register("disgusting_cookie", Item::new, new Item.Settings().food(DISGUSTING_COOKIE_FOOD_COMPONENT, DISGUSTING_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.RARE));
         public static final Item NUKE_COOKIE = register("nuke_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT).rarity(Rarity.EPIC));
-
+        public static final Item WONDERFUL_COOKIE = register("wonderful_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, WONDERFUL_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.EPIC));
 
         public static final RegistryKey<ItemGroup> STUPID_FOOD_ITEM_GROUP =
                 RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(MOD_ID, "stupid_food_group"));
