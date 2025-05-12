@@ -68,6 +68,9 @@ public abstract class PlayerEntityMixin {
             if (activeItem.isOf(Stupidfooditems.StupidFoods.NUKE_COOKIE)) {
                 nukeTime = 60 * 20;
             }
+            if (activeItem.isOf(Stupidfooditems.StupidFoods.WONDERFUL_COOKIE)) {
+                //Advancements
+            }
         }
         foodEatProgress = player.getItemUseTime();
     }
