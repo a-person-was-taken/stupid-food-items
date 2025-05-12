@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.me.stupidfooditems.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PlayerEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {},
+  "parent": "",
+  "mixinPriority": -1,
+  "server": [],
+  "setSourceFile": false,
+  "client": [],
+  "priority": -1,
+  "refmap": "",
+  "target": "",
+  "verbose": false
+}

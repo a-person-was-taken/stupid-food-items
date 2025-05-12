@@ -7,7 +7,7 @@
   "authors": [],
   "contact": {},
   "license": "All-Rights-Reserved",
-  "icon": "icon.png",
+  "icon": "assets/stupidfooditems/icon.png",
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
@@ -21,7 +21,7 @@
     ]
   },
   "mixins": [
-    "stupidfooditems.mixins.json",
+    "com.me.stupidfooditems.mixins.json",
     {
       "config": "stupidfooditems.client.mixins.json",
       "environment": "client"

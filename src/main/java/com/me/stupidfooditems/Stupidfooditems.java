@@ -32,9 +32,10 @@ import static com.me.stupidfooditems.Stupidfooditems.StupidFoods.StupidFoodCompo
 public class Stupidfooditems implements ModInitializer {
     @Override
     public void onInitialize() {
+        SimpleConfig.initialize();
         // Register effects first
-        StupidEffects.SlippageEffectClass.SLIPPAGE.getClass(); // Force effect registration
-        StupidEffects.StickyLegsEffectClass.STICKY_LEGS.getClass(); // Force effect registration
+        StupidEffects.SlippageEffectClass.SLIPPAGE.getClass();
+        StupidEffects.StickyLegsEffectClass.STICKY_LEGS.getClass();
 
         // Then register potions
         StupidPotions.SLIPPAGE_POTION = Registry.register(
@@ -79,24 +80,23 @@ public class Stupidfooditems implements ModInitializer {
                 }
 
                 public boolean applyUpdateEffect(ServerWorld world, LivingEntity entity, int amplifier) {
-                    // Your effect logic here
-                    ServerPlayerEntity player = (ServerPlayerEntity) entity;
+                    // Check if the entity is a ServerPlayerEntity before casting
+                    if (!(entity instanceof ServerPlayerEntity player)) return true;
+
                     Vec3d velocity = player.getVelocity();
                     double speed = Math.sqrt(Math.pow(velocity.x, 2) + Math.pow(velocity.y, 2) + Math.pow(velocity.z, 2));
                     if (!player.isOnGround() || speed == 0) return true;
                     double chance = Math.random() * 100;
-                    if (chance < (0.1 * (amplifier + 1))){
+                    if (chance < (0.1 * (amplifier + 1))) {
                         double slipStrength = 5 + (amplifier * 2);
                         double randYaw = (Math.random() * 2 - 1) * 180;
-                        double randPitch = Math.abs(Math.random()) * 89.9; // No downwards or horizontal movement
-                        // Randomize direction
+                        double randPitch = Math.abs(Math.random()) * 89.9;
                         player.setVelocity(new Vec3d(Math.cos(randYaw) * Math.cos(randPitch) * slipStrength, Math.sin(randPitch) * slipStrength, Math.sin(randYaw) * Math.cos(randPitch) * slipStrength));
                         player.velocityModified = true;
                         player.networkHandler.sendPacket(
                                 new TitleS2CPacket(Text.of("You slipped..."))
                         );
                     }
-
                     return super.applyUpdateEffect(world, entity, amplifier);
                 }
             }
@@ -120,11 +120,12 @@ public class Stupidfooditems implements ModInitializer {
                 }
 
                 public boolean applyUpdateEffect(ServerWorld world, LivingEntity entity, int amplifier) {
-                    // Your effect logic here
-                    ServerPlayerEntity player = (ServerPlayerEntity) entity;
+                    // Check if the entity is a ServerPlayerEntity before casting
+                    if (!(entity instanceof ServerPlayerEntity player)) return true;
+
                     Vec3d playerVelocity = player.getVelocity();
                     double friction = ((1 - 0.15 * (amplifier + 1)) < 0 ? 0 : (1 - 0.15 * (amplifier + 1)));
-                    if(playerVelocity.y > 0){
+                    if(playerVelocity.y > 0) {
                         player.setVelocity(new Vec3d(playerVelocity.x * friction, -playerVelocity.y, playerVelocity.z * friction));
                     }
                     else {
