@@ -38,7 +38,7 @@ public class StupidfooditemsClient implements ClientModInitializer {
                     client.player.getZ(),
                     0,  // velocity X
                     0.1, // velocity Y
-                    0   // velocity Z
+                    0   // velocity Ze
             );
         }
     }
