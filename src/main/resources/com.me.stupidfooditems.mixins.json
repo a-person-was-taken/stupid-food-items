@@ -16,7 +16,8 @@
   "setSourceFile": false,
   "client": [],
   "priority": -1,
-  "refmap": "",
   "target": "",
-  "verbose": false
+  "verbose": false,
+  "refmap": "stupidfooditems-refmap.json"
+
 }
