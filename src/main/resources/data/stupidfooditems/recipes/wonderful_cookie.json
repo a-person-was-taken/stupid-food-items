@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GSG",
+    "GGG"
+  ],
+  "key": [
+    {
+      "G": {
+        "item": "minecraft:gold_block"
+      },
+      "S": {
+        "item": "stupidfooditems:star_cookie"
+      }
+    }
+  ],
+  "result": {
+    "item": "stupidfooditems:wonderful_cookie",
+    "count": 1
+  }
+}

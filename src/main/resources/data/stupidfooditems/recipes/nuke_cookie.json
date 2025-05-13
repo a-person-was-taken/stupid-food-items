@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TTT",
+    "TRT",
+    "TTT"
+  ],
+  "key": [
+    {
+      "T": {
+        "item": "minecraft:tnt"
+      },
+      "R": {
+        "item": "stupidfooditems:disgusting_cookie"
+      }
+    }
+  ],
+  "result": {
+    "item": "stupidfooditems:nuke_cookie",
+    "count": 1
+  }
+}

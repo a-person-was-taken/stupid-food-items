@@ -19,6 +19,25 @@ loom {
             sourceSet sourceSets.client
         }
     }
+
+    runs {
+        datagen {
+            inherit server
+            name "Data Generation"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+            vmArg "-Dfabric-api.datagen.modid=yourmodid"
+            runDir "build/datagen"
+        }
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs += ['src/main/generated']
+        }
+    }
 }
 
 fabricApi {
@@ -66,6 +85,12 @@ dependencies {
     implementation 'org.ow2.asm:asm:9.6'
     implementation "org.lwjgl:lwjgl:3.3.2"
 
+}
+
+fabricApi {
+    configureDataGeneration() {
+        client = true
+    }
 }
 
 processResources {

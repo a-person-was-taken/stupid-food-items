@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LCL",
+    "CIC",
+    "LCL"
+  ],
+  "key": [
+    {
+      "L": {
+        "item": "minecraft:lapis_lazuil"
+      },
+      "C": {
+        "item": "stupidfooditems:butter_cookie"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    }
+  ],
+  "result": {
+    "item": "stupidfooditems:cookie_box",
+    "count": 1
+  }
+}
