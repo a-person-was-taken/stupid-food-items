@@ -137,6 +137,37 @@ public class Stupidfooditems implements ModInitializer {
                 }
             }
         }
+        public static class StupidFastEffectClass {
+            public static final RegistryEntry<StatusEffect> STUPID_FAST =
+                    Registry.registerReference(
+                            Registries.STATUS_EFFECT,
+                            Identifier.of(MOD_ID, "stupid_fast"),
+                            new StupidFastEffect()
+                    );
+
+            public static class StickyLegsEffect extends StatusEffect {
+                protected StickyLegsEffect() {
+                    super(StatusEffectCategory.HARMFUL,0xf74716);
+                }
+
+                @Override
+                public boolean canApplyUpdateEffect(int duration, int amplifier) {
+                    return true;
+                }
+
+                public boolean applyUpdateEffect(ServerWorld world, LivingEntity entity, int amplifier) {
+                    // Check if the entity is a ServerPlayerEntity before casting
+                    if (!(entity instanceof ServerPlayerEntity player)) return true;
+
+                    float yaw = player.headYaw;
+                    float pitch = player.lookDirection;
+
+                    player.setVelocity(player.getVelocity().add())
+                    player.velocityModified = true;
+                    return super.applyUpdateEffect(world, entity, amplifier);
+                }
+            }
+        }
     }
 
     public static class StupidPotions {
@@ -165,6 +196,14 @@ public class Stupidfooditems implements ModInitializer {
                     // Output potion.
                     Registries.POTION.getEntry(StupidPotions.STICKY_LEGS_POTION)
             ));
+            FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> builder.registerPotionRecipe(
+                    // Input potion.
+                    Potions.AWKWARD,
+                    // Ingredient
+                    Items.LAVA,
+                    // Output potion.
+                    Registries.POTION.getEntry(StupidPotions.STUPID_FAST_POTION)
+            ));
             // Register the item group
             Registry.register(Registries.ITEM_GROUP, STUPID_FOOD_ITEM_GROUP, CUSTOM_ITEM_GROUP);
 
@@ -182,11 +221,12 @@ public class Stupidfooditems implements ModInitializer {
                 itemGroup.add(TNT_COOKIE);
                 itemGroup.add(BOSS_COOKIE);
                 itemGroup.add(GOLDEN_COOKIE);
+                itemGroup.add(LAVA_COOKIE);
 
                 // Potions
                 itemGroup.add(PotionContentsComponent.createStack(Items.POTION, RegistryEntry.of(StupidPotions.SLIPPAGE_POTION)));
                 itemGroup.add(PotionContentsComponent.createStack(Items.POTION, RegistryEntry.of(StupidPotions.STICKY_LEGS_POTION)));
-
+                itemGroup.add(PotionContentsComponent.createStack(Items.POTION, RegistryEntry.of(StupidPotions.STUPID_FAST_POTION)));
             });
 
         }
@@ -226,7 +266,12 @@ public class Stupidfooditems implements ModInitializer {
                     .build();
 
             public static final ConsumableComponent GOLDEN_COOKIE = ConsumableComponents.food()
-                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 20 * 10, 1), 1.0f))
+                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 20 * 60 * 2, 1), 1.0f))
+                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 20 * 5, 2), 1.0f))
+                    .build();
+
+            public static final ConsumableComponent LAVA_COOKIE = ConsumableComponents.food()
+                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StupidEffects.StupidFastEffectClass.STUPID_FAST, 20 * 60 * 3, 1), 1.0f))
                     .build();
         }
 
@@ -242,6 +287,7 @@ public class Stupidfooditems implements ModInitializer {
         public static final Item TNT_COOKIE = register("tnt_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.RARE));
         public static final Item BOSS_COOKIE = register("boss_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT).rarity(Rarity.EPIC));
         public static final Item GOLDEN_COOKIE = register("golden_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, GOLDEN_COOKIE_CONSUMABLE_COMPONENT).rarity(RARE));
+        public static final Item LAVA_COOKIE = register("lava_cookie", Item::new, Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, LAVA_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.EPIC))
         
         public static final RegistryKey<ItemGroup> STUPID_FOOD_ITEM_GROUP =
                 RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(MOD_ID, "stupid_food_group"));
