@@ -5,4 +5,4 @@
 
 Feel free to do anything you want as long as you don't do any of the following:
 * Steal code or art without permission
-* 
+* Steal art or code without permission
