@@ -180,6 +180,7 @@ public class Stupidfooditems implements ModInitializer {
                 itemGroup.add(NUKE_COOKIE);
                 itemGroup.add(WONDERFUL_COOKIE);
                 itemGroup.add(TNT_COOKIE);
+                itemGroup.add(BOSS_COOKIE);
 
                 // Potions
                 itemGroup.add(PotionContentsComponent.createStack(Items.POTION, RegistryEntry.of(StupidPotions.SLIPPAGE_POTION)));
@@ -232,6 +233,7 @@ public class Stupidfooditems implements ModInitializer {
         public static final Item NUKE_COOKIE = register("nuke_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT).rarity(Rarity.EPIC));
         public static final Item WONDERFUL_COOKIE = register("wonderful_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, WONDERFUL_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.EPIC));
         public static final Item TNT_COOKIE = register("tnt_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.RARE));
+        public static final Item BOSS_COOKIE = register("boss_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT).rarity(Rarity.EPIC));
 
         public static final RegistryKey<ItemGroup> STUPID_FOOD_ITEM_GROUP =
                 RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(MOD_ID, "stupid_food_group"));

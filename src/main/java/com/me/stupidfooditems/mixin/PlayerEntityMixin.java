@@ -3,7 +3,9 @@ package com.me.stupidfooditems.mixin;
 import com.me.stupidfooditems.Stupidfooditems;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementEntry;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -12,6 +14,7 @@ import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
 import net.minecraft.server.ServerAdvancementLoader;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -51,7 +54,7 @@ public abstract class PlayerEntityMixin {
                                 player.getZ() + z,
                                 null
                         );
-                        tnt.setFuse(85);
+                        tnt.setFuse(100);
                         world.spawnEntity(tnt);
                     }
                 }
@@ -66,7 +69,14 @@ public abstract class PlayerEntityMixin {
 
         if (tntTime > 0) {
             if (tntTime % (20 * 10) == 0) {
-                world.spawnEntity(new TntEntity(EntityType.TNT, world));
+                TntEntity tnt = new TntEntity(
+                        world,
+                        player.getX(),
+                        player.getY() + 1,
+                        player.getZ(),
+                        null
+                );
+                world.spawnEntity(tnt);
             }
             tntTime--;
         }
@@ -86,6 +96,14 @@ public abstract class PlayerEntityMixin {
             }
             if (activeItem.isOf(Stupidfooditems.StupidFoods.TNT_COOKIE)) {
                 tntTime = 60 * 20 * 60 * 24;
+            }
+            if (activeItem.isOf(Stupidfooditems.StupidFoods.BOSS_COOKIE)) {
+                for (int i = 0; i < 5; i++) {
+                    spawnEntity(EntityType.ENDER_DRAGON, world, SpawnReason.COMMAND, player.getPos().add(0, 32, 0), 0.0f, 0.0f);
+                    spawnEntity(EntityType.WITHER, world, SpawnReason.COMMAND, player.getPos().add(0, 16, 0), 90.0f, 90.0f);
+                    spawnEntity(EntityType.ELDER_GUARDIAN, world, SpawnReason.NATURAL, player.getPos().add(0, 4, 0), 180.0f, 180.0f);
+                    spawnEntity(EntityType.WARDEN, world, SpawnReason.COMMAND, player.getPos().add(0, 2, 0), 270.0f, 270.0f);
+                }
             }
         }
         foodEatProgress = player.getItemUseTime();
@@ -108,5 +126,13 @@ public abstract class PlayerEntityMixin {
                 player.getAdvancementTracker().grantCriterion(entry, criterion);
             }
         }
+    }
+
+    @Unique
+    private void spawnEntity(EntityType entityType, World world, SpawnReason reason, Vec3d pos, float yaw, float pitch){
+        Entity entity = entityType.create(world, reason);
+        assert entity != null;
+        entity.refreshPositionAndAngles(pos, yaw, pitch);
+        world.spawnEntity(entity);
     }
 }
