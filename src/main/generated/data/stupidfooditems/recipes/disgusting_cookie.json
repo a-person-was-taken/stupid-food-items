@@ -5,7 +5,10 @@
       "item": "stupidfooditems:butter_cookie"
     },
     {
-      "item": "minecraft:slime_block"
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:rotten_flesh"
     }
   ],
   "result": {
