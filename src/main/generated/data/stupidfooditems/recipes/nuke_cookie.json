@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "TTT",
-    "TRT",
-    "TTT"
+    "RRR",
+    "RTR",
+    "RRR"
   ],
   "key": [
     {
@@ -17,6 +17,6 @@
   ],
   "result": {
     "item": "stupidfooditems:nuke_cookie",
-    "count": 1
+    "count": 8
   }
 }
