@@ -57,6 +57,9 @@ public class Stupidfooditems implements ModInitializer {
         StupidFoods.initialize();
     }
     public static String MOD_ID = "stupidfooditems";
+    public static class StupidEntities {
+        //Insert entities here
+    }
     public static class StupidEffects {
         public static class SlippageEffectClass {
             public static final RegistryEntry<StatusEffect> SLIPPAGE =
