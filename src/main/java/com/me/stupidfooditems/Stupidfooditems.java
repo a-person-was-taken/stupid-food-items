@@ -268,14 +268,17 @@ public class Stupidfooditems implements ModInitializer {
                     .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 20 * 60 * 5, 1), 1.0f))
                     .build();
 
-            public static final ConsumableComponent GOLDEN_COOKIE = ConsumableComponents.food()
+            public static final ConsumableComponent GOLDEN_COOKIE_CONSUMABLE_COMPONENT = ConsumableComponents.food()
                     .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 20 * 60 * 2, 1), 1.0f))
                     .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 20 * 5, 2), 1.0f))
                     .build();
 
-            public static final ConsumableComponent LAVA_COOKIE = ConsumableComponents.food()
+            public static final ConsumableComponent LAVA_COOKIE_CONSUMABLE_COMPONENT = ConsumableComponents.food()
                     .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StupidEffects.StupidFastEffectClass.STUPID_FAST, 20 * 60 * 3, 1), 1.0f))
                     .build();
+
+            public static final ConsumableComponent BURNT_COOKIE_CONSUMABLE_COMPONENT = ConsumableComponents.food()
+                    .consumeEffect(new ApplyEffectsConsumeEffect(new StatusEffectInstance(StatusEffects.POISON, 20 * 60), 0.99f))
         }
 
         public static final Item BUTTER_COOKIE = register("butter_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT));
@@ -289,8 +292,9 @@ public class Stupidfooditems implements ModInitializer {
         public static final Item WONDERFUL_COOKIE = register("wonderful_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, WONDERFUL_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.EPIC));
         public static final Item TNT_COOKIE = register("tnt_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BUTTER_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.RARE));
         public static final Item BOSS_COOKIE = register("boss_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT).rarity(Rarity.EPIC));
-        public static final Item GOLDEN_COOKIE = register("golden_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, GOLDEN_COOKIE_CONSUMABLE_COMPONENT).rarity(RARE));
+        public static final Item GOLDEN_COOKIE = register("golden_cookie", Item::new, new Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, GOLDEN_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.RARE));
         public static final Item LAVA_COOKIE = register("lava_cookie", Item::new, Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, LAVA_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.EPIC))
+        public static final Item BURNT_COOKIE = register("burnt_cookie", Item::new, Item.Settings().food(BUTTER_COOKIE_FOOD_COMPONENT, BURNT_COOKIE_CONSUMABLE_COMPONENT).rarity(Rarity.UNCOMMON))
         
         public static final RegistryKey<ItemGroup> STUPID_FOOD_ITEM_GROUP =
                 RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(MOD_ID, "stupid_food_group"));
