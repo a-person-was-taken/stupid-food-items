@@ -7,8 +7,11 @@
   ],
   "key": [
     {
-      "G": {
-        "item": "minecraft:gold_block"
+      "N": {
+        "item": "minecraft:netherite_block"
+      },
+      "D": {
+        "item": "minecraft:diamond_block"
       },
       "S": {
         "item": "stupidfooditems:golden_cookie"
