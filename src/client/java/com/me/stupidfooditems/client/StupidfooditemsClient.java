@@ -9,9 +9,11 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 
 public class StupidfooditemsClient implements ClientModInitializer {
+    private static final Identifier TINT_SCREEN_LAYER = Identifier.of(Stupidfooditems.MOD_ID, "tint-screen-layer");    
+
     @Override
     public void onInitializeClient() {
-        HudLayerRegistrationCallback.EVENT.register(layeredDrawer -> layeredDrawer.attachLayerBefore(IdentifiedLayer.CHAT, EXAMPLE_LAYER, HudRenderingEntrypoint::render));
+        HudLayerRegistrationCallback.EVENT.register(layeredDrawer -> layeredDrawer.attachLayerBefore(IdentifiedLayer.CHAT, TINT_SCREEN_LAYER, HudRenderingEntrypoint::render));
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.player == null) return;
             if (!SimpleConfig.PARTICLE_EFFECTS_ENABLED) return;
@@ -30,8 +32,8 @@ public class StupidfooditemsClient implements ClientModInitializer {
     }
 
     private static void render(DrawContext context, RenderTickCounter tickCounter) {
-		int color = 0xFFFF0000; // Red
-		int targetColor = 0xFF00FF00; // Green
+		int color = 0xFFFFFF7E; // White
+		int targetColor = 0x0000007E; // Black
 
 		// You can use the Util.getMeasuringTimeMs() function to get the current time in milliseconds.
 		// Divide by 1000 to get seconds.
@@ -43,7 +45,7 @@ public class StupidfooditemsClient implements ClientModInitializer {
 
 		// Draw a square with the lerped color.
 		// x1, x2, y1, y2, z, color
-		context.fill(0, 0, 10, 10, 0, lerpedColor);
+		context.fill(0, 0, 1920, 1080, 0, lerpedColor); //Assuming the screen size is 1080p
 	}
     
     private void spawnParticle(MinecraftClient client, ParticleEffect effect) {
@@ -56,7 +58,7 @@ public class StupidfooditemsClient implements ClientModInitializer {
                     client.player.getZ(),
                     0,  // velocity X
                     0.1, // velocity Y
-                    0   // velocity Ze
+                    0   // velocity Z
             );
         }
     }
