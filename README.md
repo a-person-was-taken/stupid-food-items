@@ -1,8 +1,7 @@
-# Stupid Food Ideas
-* Inspired by Knarfy -> https://modrinth.com/mod/knarfys-dumb-food-ideas-2
-
-**I did not take his ideas**
-
-Feel free to do anything you want as long as you don't do any of the following:
-* Steal code or art without permission
-* Steal art or code without permission
+# Stupid Food Items
+## How to download the mod:
+Run these commands:
+**Windows**
+`git clone https://github.com/a-person-was-taken/stupid-food-items.git`
+`cd stupid-food-items`
+`./gradlew build`
