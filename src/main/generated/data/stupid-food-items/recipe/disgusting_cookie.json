@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:slime_block",
+    "minecraft:rotten_flesh",
+    "#stupidfooditems:butter_cookies"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stupidfooditems:disgusting_cookie"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": "minecraft:diamond_block",
+    "c": "#stupidfooditems:butter_cookies",
+    "d": "minecraft:diamond"
+  },
+  "pattern": [
+    "bdb",
+    "dcd",
+    "bdb"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stupidfooditems:diamond_cookie"
+  }
+}

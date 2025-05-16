@@ -1,0 +1,10 @@
+{
+  "replace": true,
+  "values": [
+    "stupidfooditems:butter_cookie",
+    "stupidfooditems:rectangular_butter_cookie",
+    "stupidfooditems:star_butter_cookie",
+    "stupidfooditems:triangular_butter_cookie",
+    "stupidfooditems:umbrella_butter_cookie"
+  ]
+}

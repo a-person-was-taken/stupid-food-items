@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_butter_cookie": {
+      "conditions": {
+        "items": [
+          {
+            "items": "stupidfooditems:butter_cookie"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:burnt_cookie_from_smelting_butter_cookie"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_butter_cookie"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:burnt_cookie_from_smelting_butter_cookie"
+    ]
+  }
+}

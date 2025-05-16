@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": "minecraft:iron_block",
+    "c": "#stupidfooditems:butter_cookies",
+    "i": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    "bib",
+    "ici",
+    "bib"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stupidfooditems:iron_cookie"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "cookie_box",
+  "key": {
+    "c": "#stupidfooditems:butter_cookies",
+    "i": "minecraft:iron_ingot",
+    "l": "minecraft:lapis_lazuli"
+  },
+  "pattern": [
+    "lcl",
+    "cic",
+    "lcl"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stupidfooditems:cookie_box"
+  }
+}

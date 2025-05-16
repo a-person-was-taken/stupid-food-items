@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:wither_skeleton_skull",
+    "stupidfooditems:nuke_cookie"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stupidfooditems:boss_cookie"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": "minecraft:ancient_debris",
+    "c": "#stupidfooditems:butter_cookies",
+    "n": "minecraft:netherite_ingot"
+  },
+  "pattern": [
+    "ana",
+    "ncn",
+    "ana"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stupidfooditems:netherite_cookie"
+  }
+}

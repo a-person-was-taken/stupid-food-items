@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": "minecraft:gold_block",
+    "c": "#stupidfooditems:butter_cookies",
+    "g": "minecraft:gold_ingot"
+  },
+  "pattern": [
+    "gbg",
+    "bcb",
+    "gbg"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stupidfooditems:golden_cookie"
+  }
+}

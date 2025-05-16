@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "d": "minecraft:diamond_block",
+    "g": "stupidfooditems:golden_cookie",
+    "n": "minecraft:netherite_block"
+  },
+  "pattern": [
+    "ndn",
+    "dgd",
+    "ndn"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stupidfooditems:wonderful_cookie"
+  }
+}

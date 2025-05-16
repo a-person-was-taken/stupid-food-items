@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": "stupidfooditems:tnt_cookie",
+    "t": "minecraft:tnt"
+  },
+  "pattern": [
+    "ttt",
+    "tct",
+    "ttt"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stupidfooditems:nuke_cookie"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "item.stupidfooditems.butter_cookie": "Butter Cookie",
+  "item.stupidfooditems.rectangular_butter_cookie": "Rectangular Butter Cookie",
+  "item.stupidfooditems.star_butter_cookie": "Star Butter Cookie",
+  "item.stupidfooditems.triangular_butter_cookie": "Triangular Butter Cookie",
+  "item.stupidfooditems.umbrella_butter_cookie": "Umbrella Butter Cookie",
+  "item.stupidfooditems.disgusting_cookie": "Disgusting Cookie",
+  "item.stupidfooditems.nuke_cookie": "Nuke Cookie",
+  "item.stupidfooditems.wonderful_cookie": "Wonderful Cookie",
+  "item.stupidfooditems.honey_cookie": "Honey Cookie",
+  "item.stupidfooditems.tnt_cookie": "TNT Cookie",
+  "item.stupidfooditems.boss_cookie": "Boss Cookie",
+  "item.stupidfooditems.cookie_box": "Cookie Box",
+
+  "block.stupidfooditems.cookie_block": "Cookie Block",
+
+  "effect.minecraft.slippage": "Slippage",
+  "item.minecraft.potion.effect.slippage": "Potion of Slippage",
+  "item.minecraft.splash_potion.effect.slippage": "Splash Potion of Slippage",
+  "item.minecraft.lingering_potion.effect.slippage": "Lingering Potion of Slippage",
+
+  "effect.minecraft.sticky_legs": "Sticky Legs",
+  "item.minecraft.potion.effect.sticky_legs": "Potion of Sticky Legs",
+  "item.minecraft.splash_potion.effect.sticky_legs": "Splash Potion of Sticky Legs",
+  "item.minecraft.lingering_potion.effect.sticky_legs": "Lingering Potion of Sticky Legs",
+
+
+  "effect.stupidfooditems.stupid_fast": "Stupid Fast",
+  "item.minecraft.potion.effect.stupid_fast": "Potion of Stupid Fast",
+  "item.minecraft.splash_potion.effect.stupid_fast": "Potion of Stupid Fast",
+  "item.minecraft.lingering_potion.effect.stupid_fast": "Potion of Stupid Fast",
+
+  "itemGroup.stupidfooditems": "Stupid Foods"
+}
