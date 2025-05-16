@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.component.type.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.*;
@@ -223,7 +224,7 @@ public class Stupidfooditems implements ModInitializer {
 						double distance = Math.random() * 10;
 						Vec3d explosionPos = new Vec3d(
 							player.getPos().x + Math.cos(player.getYaw()) * Math.cos(player.getPitch()) * distance,
-							player.getPos().y + Math.sin(player.getPitch) * distance,
+							player.getPos().y + Math.sin(player.getPitch()) * distance,
 							Math.sin(player.getYaw()) * Math.cos(player.getPitch()) * distance
 						);
 						world.createExplosion(null, null, null, explosionPos.x, explosionPos.y, explosionPos.z, 5, true, World.ExplosionSourceType.BLOCK);
