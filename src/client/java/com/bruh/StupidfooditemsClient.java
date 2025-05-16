@@ -51,9 +51,9 @@ public class StupidfooditemsClient implements ClientModInitializer {
 	}
 
 	public static void render(DrawContext context, RenderTickCounter tickCounter) {
-		int color = 0xf58142ff;
+		int color = 0xf581427e;
 		MinecraftClient client = MinecraftClient.getInstance();
-		if (client.player != null && client.player.hasStatusEffect(StatusEffects.REGENERATION)) {
+		if (client.player != null && client.player.hasStatusEffect(Stupidfooditems.StupidEffects.StupidFastEffectClass.STUPID_FAST)) {
 			// Draw full-screen overlay
 			context.fill(0, 0,
 					context.getScaledWindowWidth(),
