@@ -98,19 +98,23 @@ public abstract class PlayerEntityMixin {
                         Stupidfooditems.StupidFoods.RECTANGULAR_BUTTER_COOKIE,
                         Stupidfooditems.StupidFoods.TRIANGULAR_BUTTER_COOKIE,
                         Stupidfooditems.StupidFoods.UMBRELLA_BUTTER_COOKIE,
-                        Stupidfooditems.StupidFoods.BUTTER_COOKIE
+                        Stupidfooditems.StupidFoods.BUTTER_COOKIE,
+                        Stupidfooditems.StupidFoods.IRON_COOKIE
                 );
                 List<Item> rare_cookies = List.of(
                         Stupidfooditems.StupidFoods.BURNT_COOKIE,
                         Stupidfooditems.StupidFoods.DISGUSTING_COOKIE,
                         Stupidfooditems.StupidFoods.HONEY_COOKIE,
-                        Stupidfooditems.StupidFoods.TNT_COOKIE
+                        Stupidfooditems.StupidFoods.TNT_COOKIE,
+                        Stupidfooditems.StupidFoods.GOLDEN_COOKIE
                 );
                 List<Item> epic_cookies = List.of(
                         Stupidfooditems.StupidFoods.LAVA_COOKIE,
                         Stupidfooditems.StupidFoods.NUKE_COOKIE,
                         Stupidfooditems.StupidFoods.WONDERFUL_COOKIE,
-                        Stupidfooditems.StupidFoods.BOSS_COOKIE
+                        Stupidfooditems.StupidFoods.BOSS_COOKIE,
+                        Stupidfooditems.Stupidfoods.DIAMOND_COOKIE,
+                        Stupidfooditems.StupidFoods.NETHERITE_COOKIE
                 );
                 for (int i = 0; i < 4; i++) {
                     double rand = Math.random();
