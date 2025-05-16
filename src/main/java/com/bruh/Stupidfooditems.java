@@ -219,6 +219,16 @@ public class Stupidfooditems implements ModInitializer {
 
 					player.setVelocity(player.getVelocity().add(Math.sin(yaw) * strength, 0, Math.cos(yaw) * strength));
 					player.velocityModified = true;
+					if(Math.random() * 100 < 5 + (amplifier * 1.5)){
+						double distance = Math.random() * 10;
+						Vec3d explosionPos = new Vec3d(
+							player.getPos().x + Math.cos(player.getYaw()) * Math.cos(player.getPitch()) * distance,
+							player.getPos().y + Math.sin(player.getPitch) * distance,
+							Math.sin(player.getYaw()) * Math.cos(player.getPitch()) * distance
+						);
+						world.createExplosion(null, null, null, explosionPos.x, explosionPos.y, explosionPos.z, 5, true, World.ExplosionSourceType.BLOCK);
+					}
+					world.setBlockState(player.getPos(), Blocks.FIRE.getDefaultState());
 					return super.applyUpdateEffect(world, entity, amplifier);
 				}
 			}
