@@ -1,4 +1,9 @@
 # Stupid Food Items
+## ⚠️WARNING⚠️
+ - THIS MOS IS IN BETA
+ - I CANNOT GUARANTEE THAT THE MOD WILL RUN SMOOTHLY
+ - USE AT YOUR OWN RISK
+
 ## How to download the mod:
 Run these commands:
 
